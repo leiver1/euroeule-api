@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  api:
+    build: 
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    volumes:
+      - ./:/app
+    depends_on:
+      - mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: Minecraft4Life
+      MYSQL_HOST: mysql
+
+
+  mysql:
+    image: mysql:latest
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    restart: always
+    volumes:
+      - db_data:/var/lib/mysql
+    
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 8090:80
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      PMA_HOST: mysql
+    restart: always
+
+
+
+
+volumes:
+  db_data:
