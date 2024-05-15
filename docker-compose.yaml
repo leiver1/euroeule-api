@@ -12,7 +12,7 @@ services:
     depends_on:
       - mysql
     environment:
-      MYSQL_ROOT_PASSWORD: Minecraft4Life
+      MYSQL_ROOT_PASSWORD: password
       MYSQL_HOST: mysql
 
 
