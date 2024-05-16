@@ -14,7 +14,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
+        $this->middleware('auth:api', ['except' => ['login', 'checkAuth']]);
     }
 
     /**
@@ -79,5 +79,16 @@ class AuthController extends Controller
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60
         ]);
+    }
+
+
+    public function checkAuth() {
+
+        if(Auth::check()) {
+            return response()->json(true);
+        }else{
+            
+            return response()->json(false);
+        }
     }
 }
